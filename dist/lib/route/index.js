@@ -35,7 +35,7 @@ var Route = /** @class */ (function (_super) {
         };
     };
     Route.prototype.render = function () {
-        if (~this.props.routes.indexOf(this.props.currentRoute)) {
+        if (!this.state.isActive) {
             return null;
         }
         return this.props.children;

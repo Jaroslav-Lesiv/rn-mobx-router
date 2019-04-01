@@ -25,7 +25,7 @@ class Route extends React.Component<IRouteComponentProps> {
   ) => this.state.isActive !== state.isActive;
 
   render() {
-    if (~this.props.routes.indexOf(this.props.currentRoute)) {
+    if (!this.state.isActive) {
       return null;
     }
     return this.props.children;
