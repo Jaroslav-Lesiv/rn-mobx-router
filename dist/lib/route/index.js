@@ -21,15 +21,31 @@ var mobx_react_1 = require("mobx-react");
 var Route = /** @class */ (function (_super) {
     __extends(Route, _super);
     function Route() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.state = {
+            isActive: false
+        };
+        _this.shouldComponentUpdate = function (props, state) { return _this.state.isActive !== state.isActive; };
+        return _this;
     }
+    Route.getDerivedStateFromProps = function (props) {
+        var isActive = Boolean(~props.routes.indexOf(props.currentRoute));
+        return {
+            isActive: isActive
+        };
+    };
     Route.prototype.render = function () {
-        if (~this.props.routes.indexOf(this.props.router.currentRoute.key)) {
+        if (~this.props.routes.indexOf(this.props.currentRoute)) {
             return null;
         }
         return this.props.children;
     };
     return Route;
 }(react_1.default.Component));
-var MRoute = mobx_react_1.inject("RouterStore")(Route);
+var MRoute = mobx_react_1.inject(function (_a) {
+    var routerStore = _a.routerStore;
+    return ({
+        currentRoute: routerStore.currentRoute
+    });
+})(Route);
 exports.default = MRoute;
