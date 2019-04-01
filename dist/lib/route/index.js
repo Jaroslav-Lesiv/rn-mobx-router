@@ -12,12 +12,6 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -30,14 +24,12 @@ var Route = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Route.prototype.render = function () {
-        if (this.props.router.currentRoute.key !== this.props.key) {
+        if (~this.props.routes.indexOf(this.props.router.currentRoute.key)) {
             return null;
         }
         return this.props.children;
     };
-    Route = __decorate([
-        mobx_react_1.inject("router")
-    ], Route);
     return Route;
 }(react_1.default.Component));
-exports.default = Route;
+var MRoute = mobx_react_1.inject("RouterStore")(Route);
+exports.default = MRoute;

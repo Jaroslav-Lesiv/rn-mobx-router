@@ -36,6 +36,9 @@ var withRouter = function (WrappedComponent) {
             return _super !== null && _super.apply(this, arguments) || this;
         }
         class_1.prototype.render = function () {
+            if (!this.props.routerStore) {
+                console.warn("withRouter must be wrapped inside routerStore");
+            }
             return react_1.default.createElement(WrappedComponent, __assign({}, this.props));
         };
         return class_1;

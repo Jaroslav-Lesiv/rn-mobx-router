@@ -8,4 +8,4 @@ exports.routerStore = store_1.default;
 var withRouter_1 = __importDefault(require("./lib/withRouter"));
 exports.withRouter = withRouter_1.default;
 var route_1 = __importDefault(require("./lib/route"));
-exports.Route = route_1.default;
+exports.MRoute = route_1.default;
